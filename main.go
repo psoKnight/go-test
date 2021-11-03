@@ -10,4 +10,6 @@ func main() {
 
 	api.Hello()
 	api.World()
+
+	fmt.Println("I am testing git rebase.")
 }
