@@ -47,20 +47,20 @@ func (rm *RocketMq) SendMessageSync(msg *Message) error {
 /**
 RocketMQ 订阅消息
 */
-func (rm *RocketMq) ClusterSubscribe(topic, tag string, handler MessageExtHandler) error {
+func (rm *RocketMq) Subscribe(topic, tag string, handler MessageExtHandler) error {
 
 	if err := rm.producer.CreateTopic(topic); err != nil {
 		return err
 	}
 
-	return rm.consumer.ClusterSubscribe(topic, tag, handler)
+	return rm.consumer.Subscribe(topic, tag, handler)
 }
 
 /**
 RocketMQ 取消订阅消息
 */
-func (rm *RocketMq) ClusterUnSubscribe() error {
-	return rm.consumer.ClusterUnSubscribe()
+func (rm *RocketMq) UnSubscribe() error {
+	return rm.consumer.UnSubscribe()
 }
 
 /**

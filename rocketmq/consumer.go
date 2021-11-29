@@ -49,7 +49,7 @@ func NewConsumer(cfg *Config) (*Consumer, error) {
 /**
 消费者订阅消息
 */
-func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler) error {
+func (c *Consumer) Subscribe(topic, tag string, handler MessageExtHandler) error {
 	newC, err := NewConsumer(c.config)
 	if err != nil {
 		return err
@@ -93,7 +93,7 @@ func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler
 /**
 消费者取消订阅消息
 */
-func (c *Consumer) ClusterUnSubscribe() error {
+func (c *Consumer) UnSubscribe() error {
 	newC, err := NewConsumer(c.config)
 	if err != nil {
 		return err
