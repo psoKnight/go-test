@@ -5,6 +5,7 @@ import "github.com/apache/rocketmq-client-go/v2/primitive"
 // 通用对象配置
 type Config struct {
 	Endpoints    []string // IP 端点地址，格式：127.0.0.1:9876
+	BrokerAddr   string
 	Namespace    string
 	InstanceName string
 	AccessKey    string

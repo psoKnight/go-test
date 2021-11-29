@@ -79,20 +79,6 @@ func (p *Producer) SendMessageSync(msg *Message) error {
 生产者创建topic
 */
 func (p *Producer) CreateTopic(topic string) error {
-	// 在broker连接nameserver时，同时使用admin创建topic，可能导致broker异常。因此后面改为send方式创建topic
-	//cfg := config.GetRocketMQConfig()
-	//url, err := url.Parse(cfg.Broker)
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//host := url.Host
-	//rp.config.Logger.Infof("rocketmq create topic %v in broker: %v", topic, host)
-	//return defaultAdmin.CreateTopic(
-	//	context.Background(),
-	//	admin.WithTopicCreate(topic),
-	//	admin.WithBrokerAddrCreate(host),
-	//)
 
 	msg := &Message{
 		Topic:      topic,
@@ -106,7 +92,7 @@ func (p *Producer) CreateTopic(topic string) error {
 		return errors.Errorf("[rocketmq]create topic %s err: %v.", msg.Topic, err)
 	}
 
-	logrus.Infof("[rocketmq]create topic %s success.", topic)
+	logrus.Infof("[rocketmq]Create topic %s success.", topic)
 
 	return nil
 }

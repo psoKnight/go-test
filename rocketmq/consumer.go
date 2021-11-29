@@ -50,15 +50,7 @@ func NewConsumer(cfg *Config) (*Consumer, error) {
 消费者订阅消息
 */
 func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler) error {
-	newC, err := NewConsumer(&Config{
-		Endpoints:    c.config.Endpoints,
-		Namespace:    c.config.Namespace,
-		InstanceName: c.config.InstanceName,
-		AccessKey:    c.config.AccessKey,
-		SecretKey:    c.config.SecretKey,
-		RetryTimes:   c.config.RetryTimes,
-		Group:        c.config.Group,
-	})
+	newC, err := NewConsumer(c.config)
 	if err != nil {
 		return err
 	}
@@ -73,7 +65,7 @@ func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler
 		func(ctx context.Context, msgs ...*primitive.MessageExt) (consumer.ConsumeResult, error) {
 			for _, msg := range msgs {
 				if handler == nil {
-					logrus.Warnf("[rocketmq]receive msg with no handler: %s.", msg.String())
+					logrus.Warnf("[rocketmq]Receive msg with no handler: %s.", msg.String())
 				}
 
 				if string(msg.Body) == MsgBodyForCreateTopic {
@@ -81,7 +73,7 @@ func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler
 				}
 
 				if err := handler(msg); err != nil {
-					logrus.Errorf("[rocketmq]handle rocketmq msg %s err: %s.", msg.String(), err)
+					logrus.Errorf("[rocketmq]Handle rocketmq msg %s err: %s.", msg.String(), err)
 				}
 			}
 			return consumer.ConsumeSuccess, nil
@@ -93,7 +85,7 @@ func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler
 		return err
 	}
 
-	logrus.Infof("[rocketmq]start subscribe groupId: %s, topic %s, tag: %s.", c.config.Group, topic, tag)
+	logrus.Infof("[rocketmq]Start subscribe groupId: %s, topic %s, tag: %s.", c.config.Group, topic, tag)
 
 	return nil
 }
@@ -102,15 +94,7 @@ func (c *Consumer) ClusterSubscribe(topic, tag string, handler MessageExtHandler
 消费者取消订阅消息
 */
 func (c *Consumer) ClusterUnSubscribe() error {
-	newC, err := NewConsumer(&Config{
-		Endpoints:    c.config.Endpoints,
-		Namespace:    c.config.Namespace,
-		InstanceName: c.config.InstanceName,
-		AccessKey:    c.config.AccessKey,
-		SecretKey:    c.config.SecretKey,
-		RetryTimes:   c.config.RetryTimes,
-		Group:        c.config.Group,
-	})
+	newC, err := NewConsumer(c.config)
 	if err != nil {
 		return err
 	}

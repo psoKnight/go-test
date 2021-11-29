@@ -1,6 +1,9 @@
 package rocketmq
 
 import (
+	"context"
+	"github.com/apache/rocketmq-client-go/v2/admin"
+	"github.com/apache/rocketmq-client-go/v2/primitive"
 	"github.com/sirupsen/logrus"
 )
 
@@ -80,4 +83,58 @@ RocketMQ 获取消费者
 */
 func (rm *RocketMq) Consumer() *Consumer {
 	return rm.consumer
+}
+
+/**
+RocketMQ 创建topic
+*/
+func (rm *RocketMq) CreateTopicUseAdmin(topic string) error {
+
+	defaultAdmin, err := admin.NewAdmin(admin.WithResolver(primitive.NewPassthroughResolver(rm.config.Endpoints)))
+	if err != nil {
+		return err
+	}
+
+	defer defaultAdmin.Close()
+
+	err = defaultAdmin.CreateTopic(
+		context.Background(),
+		admin.WithTopicCreate(topic),
+		admin.WithBrokerAddrCreate(rm.config.BrokerAddr),
+		//admin.WithBrokerAddrCreate(rm.config.BrokerAddr),
+	)
+	if err != nil {
+		return err
+	}
+
+	logrus.Infof("[rocketmq]Create topic %s with admin success.", topic)
+
+	return nil
+}
+
+/**
+RocketMQ 删除topic
+*/
+func (rm *RocketMq) CreateTopic(topic string) error {
+
+	defaultAdmin, err := admin.NewAdmin(admin.WithResolver(primitive.NewPassthroughResolver(rm.config.Endpoints)))
+	if err != nil {
+		return err
+	}
+
+	defer defaultAdmin.Close()
+
+	err = defaultAdmin.DeleteTopic(
+		context.Background(),
+		admin.WithTopicDelete(topic),
+		//admin.WithBrokerAddrDelete(rm.config.BrokerAddr),
+		//admin.WithNameSrvAddr(rm.config.Endpoints),
+	)
+	if err != nil {
+		return err
+	}
+
+	logrus.Infof("[rocketmq]Delete topic %s with admin success.", topic)
+
+	return nil
 }
