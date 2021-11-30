@@ -115,7 +115,7 @@ func (rm *RocketMq) CreateTopicUseAdmin(topic string) error {
 /**
 RocketMQ 删除topic
 */
-func (rm *RocketMq) CreateTopic(topic string) error {
+func (rm *RocketMq) DeleteTopic(topic string) error {
 
 	defaultAdmin, err := admin.NewAdmin(admin.WithResolver(primitive.NewPassthroughResolver(rm.config.Endpoints)))
 	if err != nil {
