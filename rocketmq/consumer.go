@@ -21,7 +21,7 @@ func NewConsumer(cfg *Config) (*Consumer, error) {
 		config: cfg,
 	}
 
-	defaultConsumer, err := rocketmq.NewPushConsumer(
+	newPushConsumer, err := rocketmq.NewPushConsumer(
 		consumer.WithNameServer(cfg.Endpoints),
 		consumer.WithCredentials(primitive.Credentials{
 			AccessKey: cfg.AccessKey,
@@ -37,11 +37,11 @@ func NewConsumer(cfg *Config) (*Consumer, error) {
 		return nil, err
 	}
 
-	if err := defaultConsumer.Start(); err != nil {
+	if err := newPushConsumer.Start(); err != nil {
 		return nil, err
 	}
 
-	c.consumer = defaultConsumer
+	c.consumer = newPushConsumer
 
 	return c, nil
 }
@@ -50,7 +50,7 @@ func NewConsumer(cfg *Config) (*Consumer, error) {
 消费者订阅消息
 */
 func (c *Consumer) Subscribe(topic, tag string, handler MessageExtHandler) error {
-	newC, err := NewConsumer(c.config)
+	newConsumer, err := NewConsumer(c.config)
 	if err != nil {
 		return err
 	}
@@ -61,7 +61,7 @@ func (c *Consumer) Subscribe(topic, tag string, handler MessageExtHandler) error
 		selector.Expression = tag
 	}
 
-	if err = newC.consumer.Subscribe(topic, selector,
+	if err = newConsumer.consumer.Subscribe(topic, selector,
 		func(ctx context.Context, msgs ...*primitive.MessageExt) (consumer.ConsumeResult, error) {
 			for _, msg := range msgs {
 				if handler == nil {
@@ -81,7 +81,7 @@ func (c *Consumer) Subscribe(topic, tag string, handler MessageExtHandler) error
 		return err
 	}
 
-	if err = newC.consumer.Start(); err != nil {
+	if err = newConsumer.consumer.Start(); err != nil {
 		return err
 	}
 

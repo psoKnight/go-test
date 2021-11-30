@@ -22,7 +22,7 @@ func NewProducer(cfg *Config) (*Producer, error) {
 		config: cfg,
 	}
 
-	defaultProducer, err := rocketmq.NewProducer(
+	newProducer, err := rocketmq.NewProducer(
 		producer.WithNameServer(cfg.Endpoints),
 		producer.WithCredentials(primitive.Credentials{
 			AccessKey: cfg.AccessKey,
@@ -37,11 +37,11 @@ func NewProducer(cfg *Config) (*Producer, error) {
 		return nil, err
 	}
 
-	if err := defaultProducer.Start(); err != nil {
+	if err := newProducer.Start(); err != nil {
 		return nil, err
 	}
 
-	c.Producer = defaultProducer
+	c.Producer = newProducer
 
 	return c, nil
 }
