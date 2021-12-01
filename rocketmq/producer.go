@@ -6,7 +6,6 @@ import (
 	"github.com/apache/rocketmq-client-go/v2/primitive"
 	"github.com/apache/rocketmq-client-go/v2/producer"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 )
 
 type Producer struct {
@@ -65,12 +64,10 @@ func (p *Producer) SendMessageSync(msg *Message) error {
 		transMsg.WithKeys(msg.Keys)
 	}
 
-	result, err := p.Producer.SendSync(context.Background(), transMsg)
+	_, err := p.Producer.SendSync(context.Background(), primitive.NewMessage(msg.Topic, msg.Body))
 	if err != nil {
 		return err
 	}
-
-	logrus.Infof("[rocketmq]Send message: %v, result: %v.", msg, result.String())
 
 	return nil
 }
@@ -91,8 +88,6 @@ func (p *Producer) CreateTopic(topic string) error {
 	if err := p.SendMessageSync(msg); err != nil {
 		return errors.Errorf("[rocketmq]create topic %s err: %v.", msg.Topic, err)
 	}
-
-	logrus.Infof("[rocketmq]Create topic %s success.", topic)
 
 	return nil
 }

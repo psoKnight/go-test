@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/apache/rocketmq-client-go/v2/admin"
 	"github.com/apache/rocketmq-client-go/v2/primitive"
-	"github.com/sirupsen/logrus"
 )
 
 type RocketMq struct {
@@ -31,8 +30,6 @@ func NewRocketMq(cfg *Config) (*RocketMq, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	logrus.Infof("[rocketmq]%v connect success.", cfg.Endpoints)
 
 	return client, nil
 }
@@ -107,8 +104,6 @@ func (rm *RocketMq) CreateTopicUseAdmin(topic string) error {
 		return err
 	}
 
-	logrus.Infof("[rocketmq]Create topic %s with admin success.", topic)
-
 	return nil
 }
 
@@ -133,8 +128,6 @@ func (rm *RocketMq) DeleteTopic(topic string) error {
 	if err != nil {
 		return err
 	}
-
-	logrus.Infof("[rocketmq]Delete topic %s with admin success.", topic)
 
 	return nil
 }
