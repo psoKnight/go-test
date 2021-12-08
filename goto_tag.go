@@ -10,10 +10,10 @@ func main() {
 retry:
 	if strings.Contains("xxxxx", "xxx") {
 
-		fmt.Println(c)
 		// 重试错误类型
 		if c < 5 {
 			c++
+			fmt.Println(c)
 			goto retry
 		}
 	}
