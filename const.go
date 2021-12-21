@@ -28,4 +28,14 @@ func main() {
 	fmt.Println(I)
 	fmt.Println(J)
 
+	fmt.Println("")
+
+	const (
+		HatColorUnknow int = iota + 16
+		HatColorWhite
+		HatColorOther
+	)
+
+	fmt.Println(HatColorUnknow, HatColorWhite, HatColorOther)
+
 }
