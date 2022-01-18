@@ -109,7 +109,7 @@ func (sr *ClientDis) SerList2Array() []string {
 }
 
 func main() {
-	cli, _ := NewClientDis([]string{"10.122.105.131:12379"})
+	cli, _ := NewClientDis([]string{"10.122.105.131:12379", "10.122.105.131:22379", "10.122.105.131:32379"})
 	cli.GetService("/node")
 
 	for {

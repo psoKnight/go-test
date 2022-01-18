@@ -113,7 +113,7 @@ func (sr *ServiceReg) RevokeLease() error {
 }
 
 func main() {
-	ser, _ := NewServiceReg([]string{"10.122.105.131:12379"}, 6)
+	ser, _ := NewServiceReg([]string{"10.122.105.131:12379", "10.122.105.131:22379", "10.122.105.131:32379"}, 6)
 	ser.PutService("/node/111", "heiheihei")
 	ser.PutService("/node/1111", "heiheihei2")
 	ser.PutService("/node/11111", "heiheihei3")
@@ -131,7 +131,7 @@ func main() {
 
 	ser3, _ := NewServiceReg([]string{"10.122.105.131:12379"}, 6)
 	ser3.PutService("/node/333", "wawawa")
-	time.Sleep(time.Duration(3) * time.Second)
+	time.Sleep(time.Duration(5) * time.Second)
 
 	ser.RevokeLease()
 	ser2.RevokeLease()
