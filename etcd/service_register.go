@@ -76,6 +76,8 @@ func (sr *ServiceReg) setLease(timeNum int64) error {
 func (sr *ServiceReg) ListenLeaseRespChan() {
 	for {
 		select {
+
+		// 时间间隔为lease TTL 时间/3
 		case leaseKeepResp := <-sr.keepAliveChan:
 			if leaseKeepResp == nil {
 				log.Printf("'%d'Lease renewal has been closed.\n", sr.leaseResp.ID)

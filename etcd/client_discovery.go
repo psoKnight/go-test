@@ -36,12 +36,14 @@ func NewClientDis(addr []string) (*ClientDis, error) {
 func (sr *ClientDis) GetService(prefix string) ([]string, error) {
 
 	// 获取键，返回对应的值，此处为只返回匹配指定前缀的值
+	// 获取当前
 	resp, errSG := sr.client.Get(context.Background(), prefix, clientv3.WithPrefix())
 	if errSG != nil {
 		return nil, errSG
 	}
 
 	// 获取值
+	// 获取动态增长
 	addrs := sr.extractAddrs(resp)
 
 	go sr.watcher(prefix)
