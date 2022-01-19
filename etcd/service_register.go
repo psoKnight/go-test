@@ -77,7 +77,7 @@ func (sr *ServiceReg) ListenLeaseRespChan() {
 	for {
 		select {
 
-		// 时间间隔为lease TTL 时间/3
+		// 时间间隔为收到chan 信息的时刻
 		case leaseKeepResp := <-sr.keepAliveChan:
 			if leaseKeepResp == nil {
 				log.Printf("'%d'Lease renewal has been closed.\n", sr.leaseResp.ID)
