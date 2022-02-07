@@ -8,6 +8,9 @@ func main() {
 	MapAdd(m)
 
 	fmt.Println(m)
+
+	var m2 map[string]int
+	fmt.Println(m2 == nil)
 }
 
 func MapAdd(m map[string]int) {

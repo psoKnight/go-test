@@ -83,7 +83,8 @@ func (sr *ServiceReg) ListenLeaseRespChan() {
 				log.Printf("'%d'Lease renewal has been closed.\n", sr.leaseResp.ID)
 				return
 			} else {
-				log.Printf("'%d' Lease success.\n", sr.leaseResp.ID)
+				log.Printf("Lease '%d' success, detail: %+v.\n", sr.leaseResp.ID, leaseKeepResp)
+
 			}
 		}
 	}
@@ -135,9 +136,9 @@ func main() {
 	ser3.PutService("/node/333", "wawawa")
 	time.Sleep(time.Duration(5) * time.Second)
 
-	ser.RevokeLease()
-	ser2.RevokeLease()
-	ser3.RevokeLease()
+	//ser.RevokeLease()
+	//ser2.RevokeLease()
+	//ser3.RevokeLease()
 
 	select {}
 

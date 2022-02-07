@@ -110,13 +110,26 @@ func (sr *ClientDis) SerList2Array() []string {
 	return addrs
 }
 
+//Close 关闭服务
+func (sr *ClientDis) Close() error {
+	return sr.client.Close()
+}
+
 func main() {
 	cli, _ := NewClientDis([]string{"10.122.105.131:12379", "10.122.105.131:22379", "10.122.105.131:32379"})
 	cli.GetService("/node")
 
+	count := 0
 	for {
 		log.Println(fmt.Sprintf("Current list: %v.", cli.SerList2Array()))
 
 		time.Sleep(time.Duration(1) * time.Second)
+
+		count++
+		if count == 10 {
+			log.Println("Close discover.")
+			cli.Close()
+
+		}
 	}
 }
