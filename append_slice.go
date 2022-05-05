@@ -8,20 +8,27 @@ func main() {
 	s = append(s, 1)
 	s = append(s, 2)
 
-	appendS(s, 3)
-
+	appendSlice(s, 3)
 	fmt.Println(s)
 
-	setS(s, 4)
-
+	setSlice(s, 4)
 	fmt.Println(s)
+
+	s2 := appendSliceButReturn(s, 3)
+	fmt.Println(s2)
 }
 
-func appendS(s []int, i int) {
+func appendSlice(s []int, i int) {
 	s = append(s, i)
 }
 
-func setS(s []int, i int) {
+func appendSliceButReturn(s []int, i int) []int {
+	s = append(s, i)
+
+	return s
+}
+
+func setSlice(s []int, i int) {
 	if len(s) == 0 {
 		return
 	}
