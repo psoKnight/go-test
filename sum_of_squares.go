@@ -1,18 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/sirupsen/logrus"
+	"math"
+)
 
 func main() {
-	arrA := []int32{1, 2, 3, 4}
-	arrB := []int32{12, 7, 9, 1}
+	arrA := []float64{1, 2, 3, 4}
+	arrB := []float64{12, 7, 9, 1}
 
 	if len(arrA) != len(arrB) {
+		logrus.Errorf("array length is not match")
 		return
 	}
 
-	var sum int32
+	var sum float64
 	for i, v := range arrA {
-		square := (v - arrB[i]) * (v - arrB[i])
+		square := math.Pow(v-arrB[i], 2)
 		sum = sum + square
 	}
 

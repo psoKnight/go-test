@@ -116,7 +116,7 @@ func (sr *ClientDis) Close() error {
 }
 
 func main() {
-	cli, _ := NewClientDis([]string{"10.122.105.131:12379", "10.122.105.131:22379", "10.122.105.131:32379"})
+	cli, _ := NewClientDis([]string{"10.117.49.69:12379", "10.117.49.69:22379", "10.117.49.69:32379"})
 	cli.GetService("/node")
 
 	count := 0
@@ -129,7 +129,7 @@ func main() {
 		if count == 10 {
 			log.Println("Close discover.")
 			cli.Close()
-
+			return
 		}
 	}
 }
