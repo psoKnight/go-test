@@ -15,6 +15,10 @@ func main() {
 	ani.Eat()
 	ani.Drink()
 	ani.Sleep()
+
+	c := &cat{}
+	c.propertyName()
+	c.attributeMeaning()
 }
 
 func getAnimal(num int) animal {
@@ -59,4 +63,25 @@ func (d *dog) Drink() {
 
 func (d *dog) Sleep() {
 	fmt.Println("Dog sleep hours.")
+}
+
+type property interface {
+	propertyName()
+	attributeMeaning()
+}
+
+func (c *cat) propertyName() {
+	fmt.Println("Cat.")
+}
+
+func (c *cat) attributeMeaning() {
+	fmt.Println("Cat proud.")
+}
+
+func (d *dog) propertyName() {
+	fmt.Println("Dog")
+}
+
+func (d *dog) attributeMeaning() {
+	fmt.Println("Dog loyalty.")
 }
