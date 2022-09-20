@@ -17,7 +17,7 @@ func main() {
 	signal.Notify(c)
 
 	cli, err := clientv3.New(clientv3.Config{
-		Endpoints:   []string{"10.122.105.131:32379"},
+		Endpoints:   []string{"10.117.49.69:32379"},
 		DialTimeout: 5 * time.Second,
 	})
 	if err != nil {
