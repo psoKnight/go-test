@@ -1,0 +1,97 @@
+definitions:
+  main.AddReq:
+    properties:
+      age:
+        description: 年龄
+        example: 26
+        type: integer
+      gender:
+        description: 性别
+        example: 1
+        type: integer
+      id:
+        description: 用户id
+        example: 1
+        type: integer
+      name:
+        description: 姓名
+        example: 张三
+        type: string
+      other:
+        $ref: '#/definitions/main.AddReqOther'
+        description: 其它
+    type: object
+  main.AddReqOther:
+    properties:
+      a:
+        description: A
+        example: a
+        type: string
+      b:
+        description: B
+        example: b
+        type: string
+      c:
+        description: C
+        example: c
+        type: string
+    type: object
+  main.AddRes:
+    properties:
+      id:
+        description: id
+        example: 1
+        type: integer
+    type: object
+  main.DeleteReq:
+    properties:
+      id:
+        description: 用户id
+        example: 1
+        type: integer
+    type: object
+  main.DeleteRes:
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/add:
+    post:
+      description: 新增用户信息
+      parameters:
+      - description: http header 验证authorization
+        in: header
+        name: authorization
+        required: true
+        type: string
+      - description: 查询参数
+        in: body
+        name: request_body
+        required: true
+        schema:
+          $ref: '#/definitions/main.AddReq'
+      responses:
+        "200":
+          description: 返回参数
+          schema:
+            $ref: '#/definitions/main.AddRes'
+      tags:
+      - 人员
+  /api/v1/delete:
+    post:
+      description: 删除用户信息
+      parameters:
+      - description: 查询参数
+        in: body
+        name: request_body
+        required: true
+        schema:
+          $ref: '#/definitions/main.DeleteReq'
+      responses:
+        "200":
+          description: 返回参数
+          schema:
+            $ref: '#/definitions/main.DeleteRes'
+      tags:
+      - 人员
+swagger: "2.0"

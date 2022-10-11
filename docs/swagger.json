@@ -1,0 +1,143 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/v1/add": {
+            "post": {
+                "description": "新增用户信息",
+                "tags": [
+                    "人员"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "http header 验证authorization",
+                        "name": "authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "查询参数",
+                        "name": "request_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.AddReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/main.AddRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/delete": {
+            "post": {
+                "description": "删除用户信息",
+                "tags": [
+                    "人员"
+                ],
+                "parameters": [
+                    {
+                        "description": "查询参数",
+                        "name": "request_body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.DeleteReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "返回参数",
+                        "schema": {
+                            "$ref": "#/definitions/main.DeleteRes"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.AddReq": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "description": "年龄",
+                    "type": "integer",
+                    "example": 26
+                },
+                "gender": {
+                    "description": "性别",
+                    "type": "integer",
+                    "example": 1
+                },
+                "id": {
+                    "description": "用户id",
+                    "type": "integer",
+                    "example": 1
+                },
+                "name": {
+                    "description": "姓名",
+                    "type": "string",
+                    "example": "张三"
+                },
+                "other": {
+                    "description": "其它",
+                    "$ref": "#/definitions/main.AddReqOther"
+                }
+            }
+        },
+        "main.AddReqOther": {
+            "type": "object",
+            "properties": {
+                "a": {
+                    "description": "A",
+                    "type": "string",
+                    "example": "a"
+                },
+                "b": {
+                    "description": "B",
+                    "type": "string",
+                    "example": "b"
+                },
+                "c": {
+                    "description": "C",
+                    "type": "string",
+                    "example": "c"
+                }
+            }
+        },
+        "main.AddRes": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "main.DeleteReq": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "用户id",
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "main.DeleteRes": {
+            "type": "object"
+        }
+    }
+}
