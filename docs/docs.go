@@ -88,6 +88,11 @@ var doc = `{
     "definitions": {
         "main.AddReq": {
             "type": "object",
+            "required": [
+                "age",
+                "gender",
+                "name"
+            ],
             "properties": {
                 "age": {
                     "description": "年龄",
@@ -96,11 +101,6 @@ var doc = `{
                 },
                 "gender": {
                     "description": "性别",
-                    "type": "integer",
-                    "example": 1
-                },
-                "id": {
-                    "description": "用户id",
                     "type": "integer",
                     "example": 1
                 },

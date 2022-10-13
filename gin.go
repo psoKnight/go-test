@@ -52,11 +52,10 @@ func main() {
 func Add(c *gin.Context) {}
 
 type AddReq struct {
-	Id     int          `json:"id" example:"1"`     // 用户id
-	Name   string       `json:"name" example:"张三"`  // 姓名
-	Age    int          `json:"age" example:"26"`   // 年龄
-	Gender int          `json:"gender" example:"1"` // 性别
-	Other  *AddReqOther `json:"other,omitempty"`    // 其它
+	Name   string       `json:"name" example:"张三" validate:"required"`  // 姓名
+	Age    int          `json:"age" example:"26" validate:"required"`   // 年龄
+	Gender int          `json:"gender" example:"1" validate:"required"` // 性别
+	Other  *AddReqOther `json:"other,omitempty"`                        // 其它
 }
 type AddReqOther struct {
 	A string `json:"a" example:"a"` // A

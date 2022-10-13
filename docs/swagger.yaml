@@ -9,10 +9,6 @@ definitions:
         description: 性别
         example: 1
         type: integer
-      id:
-        description: 用户id
-        example: 1
-        type: integer
       name:
         description: 姓名
         example: 张三
@@ -20,6 +16,10 @@ definitions:
       other:
         $ref: '#/definitions/main.AddReqOther'
         description: 其它
+    required:
+    - age
+    - gender
+    - name
     type: object
   main.AddReqOther:
     properties:
