@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	_ "go-test/docs" // docs 文件夹导入
@@ -21,7 +22,7 @@ func main() {
 	r := gin.New()
 
 	// 设置可信代理
-	r.SetTrustedProxies([]string{"192.168.*"})
+	r.SetTrustedProxies([]string{"192.168.*", "172.22.*"})
 
 	// 文档界面访问URL
 	// http://127.0.0.1:8080/swagger/index.html
@@ -33,11 +34,10 @@ func main() {
 	v1.GET("/helloworld", func(c *gin.Context) {
 		c.JSON(http.StatusOK, "Hello, world.")
 	})
-
 	v1.POST("/add", Add)       // 新增
 	v1.POST("/delete", Delete) // 删除
 
-	r.Run()
+	r.Run(":8080")
 }
 
 // Add
@@ -75,7 +75,19 @@ type AddRes struct {
 // @Param request_body body DeleteReq true "查询参数"
 // @Success 200 {object} DeleteRes "返回参数"
 // @Router /api/v1/delete [post]
-func Delete(c *gin.Context) {}
+func Delete(c *gin.Context) {
+
+	// 绑定req 参数
+	deleteReq := &DeleteReq{}
+	if err := c.ShouldBindJSON(deleteReq); err != nil {
+		logrus.Errorf("Should bind json err: %v.", err)
+		return
+	}
+
+	// 删除逻辑
+
+	logrus.Info(deleteReq.Id)
+}
 
 type DeleteReq struct {
 	Id int `json:"id" example:"1"` // 用户id
