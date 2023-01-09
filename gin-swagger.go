@@ -5,10 +5,15 @@ import (
 	"github.com/sirupsen/logrus"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "go-test/docs" // docs 文件夹导入
+	_ "go-test/docs" // docs 文件夹导入（输出的swagger 文档目录）
 	"net/http"
 )
 
+/**编译指令
+swag init -g gin-swagger.go -o ./docs
+-g：main 函数所在文件
+-o：将swagger.json 文件输出的目录
+*/
 // @title 开发文档
 // @version 0.0.1
 // @title  待测试的开发文档
@@ -58,9 +63,9 @@ type AddReq struct {
 	Other  *AddReqOther `json:"other,omitempty"`                        // 其它
 }
 type AddReqOther struct {
-	A string `json:"a" example:"a"` // A
-	B string `json:"b" example:"b"` // B
-	C string `json:"c" example:"c"` // C
+	A string `json:"a" example:"a" swaggerignore:"true"` // A，但是会被swagger 隐藏
+	B string `json:"b" example:"b"`                      // B
+	C string `json:"c" example:"c"`                      // C
 }
 
 type AddRes struct {

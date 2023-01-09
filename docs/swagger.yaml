@@ -23,10 +23,6 @@ definitions:
     type: object
   main.AddReqOther:
     properties:
-      a:
-        description: A
-        example: a
-        type: string
       b:
         description: B
         example: b
@@ -53,7 +49,13 @@ definitions:
   main.DeleteRes:
     type: object
 info:
-  contact: {}
+  contact:
+    email: test@qq.com
+    name: API Support
+    url: test.com
+  description: Golang api of demo
+  title: 待测试的开发文档
+  version: "1.0"
 paths:
   /api/v1/add:
     post:

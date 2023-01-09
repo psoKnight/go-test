@@ -1,7 +1,14 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Golang api of demo",
+        "title": "待测试的开发文档",
+        "contact": {
+            "name": "API Support",
+            "url": "test.com",
+            "email": "test@qq.com"
+        },
+        "version": "1.0"
     },
     "paths": {
         "/api/v1/add": {
@@ -99,11 +106,6 @@
         "main.AddReqOther": {
             "type": "object",
             "properties": {
-                "a": {
-                    "description": "A",
-                    "type": "string",
-                    "example": "a"
-                },
                 "b": {
                     "description": "B",
                     "type": "string",

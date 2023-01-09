@@ -17,7 +17,11 @@ var doc = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "API Support",
+            "url": "test.com",
+            "email": "test@qq.com"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -118,11 +122,6 @@ var doc = `{
         "main.AddReqOther": {
             "type": "object",
             "properties": {
-                "a": {
-                    "description": "A",
-                    "type": "string",
-                    "example": "a"
-                },
                 "b": {
                     "description": "B",
                     "type": "string",
@@ -172,12 +171,12 @@ type swaggerInfo struct {
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
-	Version:     "",
+	Version:     "1.0",
 	Host:        "",
 	BasePath:    "",
 	Schemes:     []string{},
-	Title:       "",
-	Description: "",
+	Title:       "待测试的开发文档",
+	Description: "Golang api of demo",
 }
 
 type s struct{}
