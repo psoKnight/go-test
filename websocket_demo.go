@@ -52,13 +52,13 @@ var upgrader = websocket.Upgrader{
 // 定义一个阅读器，它将监听发送到我们的 WebSocket 端点的新消息
 func reader(conn *websocket.Conn) {
 	for {
-		// read in a message
+		// 阅读留言
 		messageType, p, err := conn.ReadMessage()
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		// print out that message for clarity
+		// 为清楚起见打印出该消息
 		fmt.Println(string(p))
 
 		if err := conn.WriteMessage(messageType, p); err != nil {
